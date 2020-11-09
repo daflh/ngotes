@@ -1,0 +1,33 @@
+{
+  "name": "ngotes",
+  "version": "1.0.0",
+  "description": "MongoDB Notes",
+  "scripts": {
+    "clean": "rimraf dist",
+    "start": "npm run clean && netlify dev",
+    "build": "npm run clean && parcel build src/index.html",
+    "serve-parcel": "parcel src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dafiulh/ngotes.git"
+  },
+  "keywords": [],
+  "author": "Dafiul Haq",
+  "license": "MIT",
+  "homepage": "https://github.com/dafiulh/ngotes#readme",
+  "dependencies": {
+    "alpinejs": "^2.7.2",
+    "autosize": "^4.0.2",
+    "gotrue-js": "^0.9.27",
+    "mongodb": "^3.6.2",
+    "tailwindcss": "^1.8.10"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "netlify-cli": "^2.64.1",
+    "parcel-bundler": "^1.12.4",
+    "rimraf": "^3.0.2"
+  }
+}

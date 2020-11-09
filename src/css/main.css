@@ -1,0 +1,70 @@
+@import "./font.css";
+
+@tailwind base;
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+[x-cloak] {
+    @apply hidden !important;
+}
+
+@tailwind components;
+
+.spinner {
+    @apply animate-spin;
+    width: 36px;
+    height: 36px;
+    border: 3px solid #61c189;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+}
+
+.modal {
+    @apply flex justify-center items-center fixed top-0 left-0 right-0 bottom-0;
+    background: rgba(0,0,0,0.6);
+}
+
+.modal .modal-content {
+    @apply bg-white max-h-screen rounded overflow-y-auto box-border;
+}
+
+.icon {
+    @apply inline-block align-middle cursor-pointer bg-no-repeat;
+    background-image: url("../img/icons.svg");
+    background-size: 60px 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.icon.unpinned {
+    background-position: 0px 0px;
+}
+
+.icon.pinned {
+    background-position: -20px 0px;
+}
+
+.icon.delete {
+    background-position: -40px 0px;
+}
+
+#new-note.grow {
+    @apply h-48 shadow !important;
+}
+
+#edit-note-modal textarea {
+    min-height: 8.5rem;
+    max-height: 80vh;
+}
+
+@tailwind utilities;
+
+.shadow-t {
+    box-shadow: 0 -1px 0 0 #e0e3e8, 0 -2px 6px 0 rgba(69,98,155,0.12);
+}
+
+.first-line-semibold:first-line {
+    @apply font-semibold
+}
