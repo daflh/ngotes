@@ -5,8 +5,9 @@
   "scripts": {
     "clean": "rimraf dist",
     "start": "npm run clean && netlify dev",
-    "build": "npm run clean && parcel build src/index.html",
-    "serve-parcel": "parcel src/index.html"
+    "build": "npm run clean && netlify build",
+    "parcel:serve": "parcel src/index.html",
+    "parcel:build": "parcel build src/index.html"
   },
   "repository": {
     "type": "git",

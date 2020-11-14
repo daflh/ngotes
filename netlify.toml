@@ -1,8 +1,8 @@
 [build]
+  command = "npm run parcel:build"
   publish = "dist"
-  command = "npm run build"
   functions = "functions"
 
 [dev]
-  command = "npm run serve-parcel"
+  command = "npm run parcel:serve"
   autoLaunch = false
