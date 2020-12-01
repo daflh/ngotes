@@ -36,7 +36,7 @@ exports.handler = async (event, context) => {
             statusCode,
             headers: {
                 "Content-Type": "application/json",
-                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE"
+                "Access-Control-Allow-Methods": "GET, POST, PATCH, DELETE"
             },
             body: JSON.stringify({
                 status: statusCode < 400 ? 1 : 0,
@@ -100,7 +100,7 @@ exports.handler = async (event, context) => {
                 });
 
             // update an existing note
-            case "PUT":
+            case "PATCH":
                 let updateDocument = {
                     lastModified: timestamp
                 };
@@ -136,7 +136,7 @@ exports.handler = async (event, context) => {
                     deleted_id: isDeleted ? pathLastSegment : undefined
                 });
 
-            // only GET/POST/PUT/DELETE method supported
+            // only GET/POST/PATCH/DELETE method allowed
             default:
                 throw new Error("Invalid HTTP Method");
         }

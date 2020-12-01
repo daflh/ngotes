@@ -167,7 +167,7 @@ window.data = () => ({
         if (oldTitle === title && oldContent === content) {
             this.editNoteModal.noteId = null;
         } else {
-            this.makeRequestToServer("PUT", noteId, {
+            this.makeRequestToServer("PATCH", noteId, {
                 title,
                 content
             }).then(({ timestamp }) => {
@@ -184,7 +184,7 @@ window.data = () => ({
         const noteIndex = this.notes.findIndex((note) => note._id === noteId);
         const notePin = this.notes[noteIndex].pin;
 
-        this.makeRequestToServer("PUT", noteId, {
+        this.makeRequestToServer("PATCH", noteId, {
             pin: !notePin
         }).then(({ timestamp }) => {
             this.notes[noteIndex].pin = !notePin;
