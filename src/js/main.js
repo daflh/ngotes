@@ -37,9 +37,10 @@ window.data = () => ({
     // will show if noteId !== null
     editNoteModal: {
         noteId: null,
-        noteTitleContent: "",
+        // this is basically noteTitle + '\n' + noteContent
+        noteValue: "",
         get savable() {
-            return /^\S[\s\S]*/.test(this.noteTitleContent);
+            return /^\S[\s\S]*/.test(this.noteValue);
         }
     },
     // will show if noteId !== null
@@ -57,7 +58,7 @@ window.data = () => ({
 
         // initialiaze autosize for edit note textarea
         autosize(editNoteTextarea);
-        $watch("editNoteModal.noteTitleContent", () => {
+        $watch("editNoteModal.noteValue", () => {
             $nextTick(() => autosize.update(editNoteTextarea));
         });
 
@@ -158,7 +159,7 @@ window.data = () => ({
             title: oldTitle,
             content: oldContent
         } = this.notes[noteIndex];
-        const textareaLines = this.editNoteModal.noteTitleContent.split("\n");
+        const textareaLines = this.editNoteModal.noteValue.split("\n");
         const title = textareaLines[0];
         const content = textareaLines.slice(1).join("\n");
 

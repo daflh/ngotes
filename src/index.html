@@ -64,7 +64,7 @@
                     <template x-if="notes" x-for="note in notes" :key="note._id">
                         <div 
                             class="rounded shadow px-5 py-4 cursor-pointer"
-                            @click="editNoteModal.noteId = note._id; editNoteModal.noteTitleContent = `${note.title}\n${note.content}`"
+                            @click="editNoteModal.noteId = note._id; editNoteModal.noteValue = `${note.title}\n${note.content}`"
                         >
                             <div class="flex justify-between">
                                 <span class="text-gray-700 font-semibold" x-text="note.title"></span>
@@ -141,7 +141,7 @@
                 <textarea 
                     class="block w-full px-6 py-5 bg-gray-100 text-gray-700 resize-none first-line-semibold focus:outline-none" 
                     :placeholder="'Title\nWrite new note here …'" 
-                    x-model="editNoteModal.noteTitleContent"
+                    x-model="editNoteModal.noteValue"
                     x-ref="editNoteTextarea"
                     spellcheck="false" 
                 ></textarea>
