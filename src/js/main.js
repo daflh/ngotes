@@ -26,6 +26,13 @@ window.data = () => ({
     notes: null,
     // true if notes are being fetched from the database
     fetchingNotes: false,
+    // whether to show confirmation dialog before unload (close/reload page)
+    get askBeforeUnload() {
+        const newNoteSavable = this.newNote.savable;
+        const editNoteChanged = (this.editNoteModal.noteId !== null && this.editNoteModal.noteValueChanged);
+
+        return newNoteSavable || editNoteChanged;
+    },
     newNote: {
         textareaValue: "",
         focus: false,
@@ -39,6 +46,7 @@ window.data = () => ({
         noteId: null,
         // this is basically noteTitle + '\n' + noteContent
         noteValue: "",
+        noteValueChanged: false,
         get savable() {
             return /^\S[\s\S]*/.test(this.noteValue);
         }

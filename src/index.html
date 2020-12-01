@@ -7,7 +7,7 @@
         <link rel="shortcut icon" href="./img/favicon.png">
         <link rel="apple-touch-icon" sizes="64x64" href="./img/favicon.png">
     </head>
-    <body class="bg-white" x-data="data()" x-init="init({ $refs, $watch, $nextTick })">
+    <body class="bg-white" x-data="data()" x-init="init({ $refs, $watch, $nextTick })" @beforeunload.window.prevent="askBeforeUnload && ($event.returnValue = '')">
         <header class="text-gray-800 shadow">
             <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
                 <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" href="/">
@@ -62,10 +62,11 @@
                         <div class="text-center text-gray-600">You haven't created any note yet</div>
                     </template>
                     <template x-if="notes" x-for="note in notes" :key="note._id">
-                        <div 
-                            class="rounded shadow px-5 py-4 cursor-pointer"
-                            @click="editNoteModal.noteId = note._id; editNoteModal.noteValue = `${note.title}\n${note.content}`"
-                        >
+                        <div class="rounded shadow px-5 py-4 cursor-pointer" @click="
+                            editNoteModal.noteId = note._id;
+                            editNoteModal.noteValue = `${note.title}\n${note.content}`;
+                            editNoteModal.noteValueChanged = false;
+                        ">
                             <div class="flex justify-between">
                                 <span class="text-gray-700 font-semibold" x-text="note.title"></span>
                                 <span class="float-right pl-2 space-x-2">
@@ -142,6 +143,7 @@
                     class="block w-full px-6 py-5 bg-gray-100 text-gray-700 resize-none first-line-semibold focus:outline-none" 
                     :placeholder="'Title\nWrite new note here …'" 
                     x-model="editNoteModal.noteValue"
+                    @input="editNoteModal.noteValueChanged = true"
                     x-ref="editNoteTextarea"
                     spellcheck="false" 
                 ></textarea>
@@ -152,7 +154,8 @@
                         :class="{ 'text-gray-500': !editNoteModal.savable }"
                         @click="editNote(editNoteModal.noteId)"
                         :disabled="!editNoteModal.savable"
-                    >Save</button>
+                        x-text="editNoteModal.noteValueChanged ? 'Save' : 'Close'"
+                    ></button>
                 </footer>
             </div>
         </div>
