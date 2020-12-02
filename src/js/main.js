@@ -117,8 +117,16 @@ window.data = () => ({
     singup() {
         const entryModal = this.entryModal;
 
-        auth.signup(entryModal.email, entryModal.password).then(() => {
-            this.entryModal.message = "A verification link has been sent to your email, open it up to activate your account";
+        auth.signup(entryModal.email, entryModal.password).then((user) => {
+            let message;
+
+            if (user.confirmed_at) {
+                message = "Successfully signed up! You can now login";
+            } else {
+                message = "A verification link has been sent to your email, open it up to activate your account";
+            }
+
+            this.entryModal.message = message;
         }).catch(({ json }) => {
             this.entryModal.message = json.error_description || json.msg;
         });
