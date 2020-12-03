@@ -9,6 +9,9 @@
     </head>
     <body class="bg-white" x-data="data()" x-init="init({ $refs, $watch, $nextTick })" @beforeunload.window.prevent="askBeforeUnload && ($event.returnValue = '')">
         <header class="text-gray-800 shadow">
+            <div class="absolute z-50 transition-opacity duration-200 ease-in-out pointer-events-none" :class="{ 'opacity-0': !showLoadingBar }" x-cloak>
+                <span class="loading-bar bg-green-500 rounded shadow"></span>
+            </div>
             <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
                 <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" href="/">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10" viewBox="0 0 24 24">

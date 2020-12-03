@@ -24,6 +24,7 @@ window.data = () => ({
     },
     email: null,
     notes: null,
+    showLoadingBar: false,
     // true if notes are being fetched from the database
     fetchingNotes: false,
     // whether to show confirmation dialog before unload (close/reload page)
@@ -107,15 +108,21 @@ window.data = () => ({
     login() {
         const entryModal = this.entryModal;
 
+        this.showLoadingBar = true;
+
         auth.login(entryModal.email, entryModal.password, entryModal.remember).then((user) => {
             this.email = user.email;
             this.fetchNotes();
         }).catch(({ json }) => {
             this.entryModal.message = json.error_description || json.msg;
+        }).finally(() => {
+            this.showLoadingBar = false;
         });
     },
     singup() {
         const entryModal = this.entryModal;
+
+        this.showLoadingBar = true;
 
         auth.signup(entryModal.email, entryModal.password).then((user) => {
             let message;
@@ -129,12 +136,18 @@ window.data = () => ({
             this.entryModal.message = message;
         }).catch(({ json }) => {
             this.entryModal.message = json.error_description || json.msg;
+        }).finally(() => {
+            this.showLoadingBar = false;
         });
     },
     logout() {
+        this.showLoadingBar = true;
+
         auth.currentUser().logout().then(() => {
             this.email = null;
             this.notes = null;
+        }).catch(console.log).finally(() => {
+            this.showLoadingBar = false;
         });
     },
     fetchNotes() {
@@ -242,6 +255,8 @@ window.data = () => ({
             ...body ? { body: JSON.stringify(body) } : {}
         };
 
+        this.showLoadingBar = true;
+
         return new Promise((resolve, reject) => {
             fetch(url, options)
             .then(_ => _.json())
@@ -252,6 +267,8 @@ window.data = () => ({
                 } else {
                     reject(res.message);
                 }
+
+                this.showLoadingBar = false;
             });
         });
     }
