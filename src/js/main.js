@@ -89,7 +89,18 @@ window.data = () => ({
 
         if (userEmail) {
             this.email = userEmail;
-            this.fetchNotes();
+
+            const currentTime = new Date().getTime();
+            const tokenExpiresAt = auth.currentUser().token.expires_at;
+
+            // refresh token if expires (after 1 hour)
+            if (currentTime >= tokenExpiresAt) {
+                auth.currentUser().jwt().then(() => {
+                    this.fetchNotes();
+                }).catch(console.error);
+            } else {
+                this.fetchNotes();
+            }
         }
     },
     // check whether email/password entered are in correct format
@@ -146,7 +157,7 @@ window.data = () => ({
         auth.currentUser().logout().then(() => {
             this.email = null;
             this.notes = null;
-        }).catch(console.log).finally(() => {
+        }).catch(console.error).finally(() => {
             this.showLoadingBar = false;
         });
     },
@@ -255,7 +266,11 @@ window.data = () => ({
             ...body ? { body: JSON.stringify(body) } : {}
         };
 
-        this.showLoadingBar = true;
+        // show loading bar while making http request
+        // exception for GET request because it uses spinner
+        if (method !== "GET") {
+            this.showLoadingBar = true;
+        }
 
         return new Promise((resolve, reject) => {
             fetch(url, options)
