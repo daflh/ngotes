@@ -39,7 +39,7 @@
                         id="new-note" 
                         class="w-full rounded px-4 py-3 h-16 shadow-md mx-auto transition-all duration-300 resize-none focus:outline-none"
                         :class="{ 'grow first-line-semibold': newNote.focus || newNote.savable }"
-                        :placeholder="(newNote.focus || newNote.savable) ? 'Note title\nWrite something here …' : 'Write new note here …'" 
+                        :placeholder="(newNote.focus || newNote.savable) ? 'My note title\nTo be, or not to be, that is the question' : 'Write new note here …'" 
                         :disabled="email === null || fetchingNotes"
                         spellcheck="false"
                         @focusin="newNote.focus = true"
@@ -144,7 +144,7 @@
             <div class="modal-content w-full max-w-3xl mx-4 md:mx-8" @click.away="editNoteModal.noteId = null">
                 <textarea 
                     class="block w-full px-6 py-5 bg-gray-100 text-gray-700 resize-none first-line-semibold focus:outline-none" 
-                    :placeholder="'Note title\nWrite something here …'" 
+                    :placeholder="'My note title\nTo be, or not to be, that is the question'" 
                     x-model="editNoteModal.noteValue"
                     @input="editNoteModal.noteValueChanged = true"
                     x-ref="editNoteTextarea"
