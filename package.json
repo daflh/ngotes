@@ -11,12 +11,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dafiulh/ngotes.git"
+    "url": "git+https://github.com/daflh/ngotes.git"
   },
   "keywords": [],
   "author": "Dafiul Haq",
   "license": "MIT",
-  "homepage": "https://github.com/dafiulh/ngotes#readme",
+  "homepage": "https://github.com/daflh/ngotes#readme",
   "dependencies": {
     "alpinejs": "^2.7.2",
     "autosize": "^4.0.2",
